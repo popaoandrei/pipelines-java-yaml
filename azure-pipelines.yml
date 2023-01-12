@@ -20,3 +20,14 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: SynopsysDetectTask@8
+  inputs:
+    BlackDuckService: 'blackduck yaml'
+    DetectArguments: |
+      --blackduck.trust.cert=true
+      --detect.blackduck.signature.scanner.snippet.matching=FULL_SNIPPET_MATCHING
+      --detect.blackduck.signature.scanner.individual.file.matching=ALL
+      --detect.detector.search.depth=100
+      --detect.project.name=azurepipelines
+      --detect.project.version.name=1.0
+    DetectVersion: 'latest'
